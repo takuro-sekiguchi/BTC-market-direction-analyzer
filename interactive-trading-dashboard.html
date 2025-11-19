@@ -538,15 +538,18 @@
         }
 
         .dir-btn {
-            padding: 25px;
+            padding: 16px 20px;
             border: 2px solid #2a3a4a;
             background: #0f1722;
-            border-radius: 15px;
+            border-radius: 12px;
             cursor: pointer;
             text-align: center;
             transition: all 0.3s;
             font-size: 20px;
             font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .dir-btn:hover {
@@ -1159,20 +1162,19 @@
             
             <!-- 現在価格表示 -->
             <div style="background: #0f1722; border-radius: 8px; padding: 16px; margin-bottom: 20px; text-align: center; border: 1px solid rgba(42, 58, 74, 0.4);">
-                <div style="color: #7a8a9a; font-size: 12px; margin-bottom: 4px;">現在のBTC/USD価格</div>
+                <div style="color: #7a8a9a; font-size: 12px;">現在のBTC/USD価格(Coinbase)</div>
                 <div style="color: #00d4ff; font-size: 24px; font-weight: 700;" id="currentBtcPrice">$--,---</div>
-                <div style="color: #7a8a9a; font-size: 10px; margin-top: 4px;">Coinbase</div>
             </div>
             
             <!-- 方向選択 -->
             <div class="direction-buttons">
                 <button class="dir-btn buy" onclick="selectDirection('buy')">
-                    <div style="font-size: 22px; margin-bottom: 4px;">↑</div>
-                    <div style="font-size: 13px;">買い（ロング）</div>
+                    <span style="font-size: 18px; margin-right: 8px;">↑</span>
+                    <span style="font-size: 14px;">買い</span>
                 </button>
                 <button class="dir-btn sell" onclick="selectDirection('sell')">
-                    <div style="font-size: 22px; margin-bottom: 4px;">↓</div>
-                    <div style="font-size: 13px;">売り（ショート）</div>
+                    <span style="font-size: 18px; margin-right: 8px;">↓</span>
+                    <span style="font-size: 14px;">売り</span>
                 </button>
             </div>
 
@@ -1239,17 +1241,8 @@
 
             <button class="calc-button" id="calcButton" onclick="calculatePatternAnalysis()" disabled style="padding: 14px; font-size: 15px; font-weight: 600; margin-bottom: 16px;">
                 分析実行
+                <div style="font-size: 11px; font-weight: 400; color: #ffffff; margin-top: 2px;">1クレジットが消費されます</div>
             </button>
-            
-            <!-- クレジット消費説明 -->
-            <div style="text-align: center; margin-top: 8px; padding: 10px; background: rgba(0, 212, 255, 0.08); border-radius: 6px; border: 1px solid rgba(0, 212, 255, 0.15);">
-                <div style="color: #00d4ff; font-size: 12px; font-weight: 500;">
-                    <span style="margin-right: 6px;">💳</span>この分析には1クレジットが消費されます
-                </div>
-                <div style="color: #7a8a9a; font-size: 11px; margin-top: 3px;">
-                    分析実行後、残りクレジット数が更新されます
-                </div>
-            </div>
 
             <!-- 分析結果セクション（右カラム内） -->
             <div class="result-section" id="resultSection" style="display: none; margin-top: 20px;">
