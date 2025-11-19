@@ -610,6 +610,7 @@
             outline: none;
             cursor: pointer;
             position: relative;
+            vertical-align: middle; /* 垂直中央揃え */
         }
 
         .pips-slider::-webkit-slider-track {
@@ -632,7 +633,7 @@
             cursor: pointer;
             box-shadow: 0 2px 8px rgba(0, 212, 255, 0.4), 0 1px 4px rgba(0, 0, 0, 0.2);
             transition: all 0.2s ease;
-            margin-top: -8px;
+            margin-top: -8px; /* トラックとの相対的な配置 */
         }
 
         .pips-slider::-webkit-slider-thumb:hover {
@@ -648,23 +649,23 @@
 
         .pips-slider::-moz-range-track {
             width: 100%;
-            height: 16px;
+            height: 12px;
             background: linear-gradient(to right, #1a2332 0%, #2a3a4a 50%, #3a4a5a 100%);
-            border-radius: 8px;
-            border: 2px solid #0a1220;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+            border-radius: 6px;
+            border: 1px solid #0a1220;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
         }
 
         .pips-slider::-moz-range-thumb {
-            width: 36px;
-            height: 36px;
+            width: 28px;
+            height: 28px;
             background: linear-gradient(145deg, #00d4ff, #0099ff);
-            border: 3px solid #ffffff;
+            border: 2px solid #ffffff;
             border-radius: 50%;
-            border: none;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(0, 212, 255, 0.6), 0 2px 6px rgba(0, 0, 0, 0.3);
             transition: all 0.2s ease;
+            border: none; /* border重複を削除 */
         }
 
         .pips-slider::-moz-range-thumb:hover {
@@ -684,17 +685,36 @@
         }
 
         /* スライダーのプログレスバー効果 */
+        .slider-container {
+            position: relative;
+            margin: 8px 0;
+            height: 32px;
+            /* flexboxを削除して直接配置 */
+        }
+
+        .slider-progress {
+            position: absolute;
+            top: 50%;
+            left: 14px; /* スライダーのつまみ半径分調整 */
+            height: 12px;
+            background: linear-gradient(to right, #00d4ff, #0099ff);
+            border-radius: 6px;
+            transform: translateY(-50%);
+            transition: none; /* アニメーションを無効化してリアルタイム更新 */
+            pointer-events: none;
+            z-index: 1;
+            width: 0;
+        }
+
         .pips-slider {
-            background: linear-gradient(to right, 
-                #00d4ff 0%, 
-                #00d4ff var(--progress, 50%), 
-                #2a3a4a var(--progress, 50%), 
-                #2a3a4a 100%
-            );
-            background-size: 100% 16px;
-            background-repeat: no-repeat;
-            background-position: center;
-            border-radius: 8px;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            z-index: 2;
+            width: 100%;
+            height: 32px;
         }
 
         /* 勝率計算結果 */
@@ -1074,7 +1094,7 @@
                     {
                         "width": "100%",
                         "height": 600,
-                        "symbol": "BITSTAMP:BTCUSD",
+                        "symbol": "COINBASE:BTCUSD",
                         "interval": "60",
                         "timezone": "Asia/Tokyo",
                         "theme": "dark",
@@ -1107,11 +1127,22 @@
                             "use_localstorage_for_settings",
                             "save_chart_properties_to_local_storage",
                             "chart_property_page_style",
-                            "disable_resolution_rebuild",
-                            "chart_template"
+                            "chart_template",
+                            "timeframes_toolbar",
+                            "header_symbol_search",
+                            "header_resolutions",
+                            "header_chart_type",
+                            "header_settings",
+                            "left_toolbar",
+                            "control_bar",
+                            "timeframes_toolbar",
+                            "edit_buttons_in_legend"
                         ],
                         "disabled_features": [
-                            "popup_hints"
+                            "popup_hints",
+                            "header_saveload",
+                            "header_screenshot",
+                            "header_undo_redo"
                         ],
                         "toolbar_bg": "#1a2332",
                         "hide_side_toolbar": false
@@ -1125,6 +1156,13 @@
             <!-- 右カラム: 投資シミュレーションツール -->
         <div class="user-selection">
             <h3 class="selection-title">投資シミュレーションツール</h3>
+            
+            <!-- 現在価格表示 -->
+            <div style="background: #0f1722; border-radius: 8px; padding: 16px; margin-bottom: 20px; text-align: center; border: 1px solid rgba(42, 58, 74, 0.4);">
+                <div style="color: #7a8a9a; font-size: 12px; margin-bottom: 4px;">現在のBTC/USD価格</div>
+                <div style="color: #00d4ff; font-size: 24px; font-weight: 700;" id="currentBtcPrice">$--,---</div>
+                <div style="color: #7a8a9a; font-size: 10px; margin-top: 4px;">Coinbase</div>
+            </div>
             
             <!-- 方向選択 -->
             <div class="direction-buttons">
@@ -1144,19 +1182,25 @@
                 <div style="margin-bottom: 16px;">
                     <div class="pips-label">
                         <span style="color: #7a8a9a; font-size: 13px;">利確幅（TP）</span>
-                        <span class="pips-value" id="tpPipsValue" style="font-size: 14px; font-weight: 600;">50 pips</span>
+                        <span class="pips-value" id="tpPipsValue" style="font-size: 14px; font-weight: 600;">100 pips</span>
+                    </div>
+                    <div style="background: #0a0e1a; border-radius: 6px; padding: 8px; margin-bottom: 8px; text-align: center;">
+                        <div style="color: #7a8a9a; font-size: 11px;">目標価格</div>
+                        <div style="color: #00ff00; font-size: 16px; font-weight: 600;" id="tpPriceLevel">$--,---</div>
                     </div>
                     <div class="slider-container">
+                        <div class="slider-progress" id="tpProgressBar"></div>
                         <input type="range" class="pips-slider" id="tpPipsSlider" 
-                               min="10" max="100" value="50" step="5"
-                               oninput="updateTpPips(this.value)">
+                               min="100" max="10000" value="100" step="100"
+                               oninput="updateTpPips(this.value)" 
+                               onchange="updateTpPips(this.value)">
                     </div>
                     <div class="slider-labels">
-                        <span>10</span>
-                        <span>30</span>
-                        <span>50</span>
-                        <span>70</span>
                         <span>100</span>
+                        <span>2500</span>
+                        <span>5000</span>
+                        <span>7500</span>
+                        <span>10000</span>
                     </div>
                 </div>
 
@@ -1164,19 +1208,25 @@
                 <div style="margin-bottom: 16px;">
                     <div class="pips-label">
                         <span style="color: #7a8a9a; font-size: 13px;">損切り幅（SL）</span>
-                        <span class="pips-value" id="slPipsValue" style="font-size: 14px; font-weight: 600;">20 pips</span>
+                        <span class="pips-value" id="slPipsValue" style="font-size: 14px; font-weight: 600;">100 pips</span>
+                    </div>
+                    <div style="background: #0a0e1a; border-radius: 6px; padding: 8px; margin-bottom: 8px; text-align: center;">
+                        <div style="color: #7a8a9a; font-size: 11px;">ストップ価格</div>
+                        <div style="color: #ff3b3b; font-size: 16px; font-weight: 600;" id="slPriceLevel">$--,---</div>
                     </div>
                     <div class="slider-container">
+                        <div class="slider-progress" id="slProgressBar"></div>
                         <input type="range" class="pips-slider" id="slPipsSlider" 
-                               min="10" max="100" value="20" step="5"
-                               oninput="updateSlPips(this.value)">
+                               min="100" max="10000" value="100" step="100"
+                               oninput="updateSlPips(this.value)"
+                               onchange="updateSlPips(this.value)">
                     </div>
                     <div class="slider-labels">
-                        <span>10</span>
-                        <span>30</span>
-                        <span>50</span>
-                        <span>70</span>
                         <span>100</span>
+                        <span>2500</span>
+                        <span>5000</span>
+                        <span>7500</span>
+                        <span>10000</span>
                     </div>
                 </div>
 
@@ -1609,27 +1659,6 @@
             document.getElementById('calcButton').disabled = false;
         }
 
-        function updateTpPips(value) {
-            selectedTpPips = parseInt(value);
-            document.getElementById('tpPipsValue').textContent = value + ' pips';
-            
-            // プログレスバーの視覚更新
-            const progress = ((value - 10) / (100 - 10)) * 100;
-            document.getElementById('tpPipsSlider').style.setProperty('--progress', progress + '%');
-            
-            updateRiskReward();
-        }
-
-        function updateSlPips(value) {
-            selectedSlPips = parseInt(value);
-            document.getElementById('slPipsValue').textContent = value + ' pips';
-            
-            // プログレスバーの視覚更新
-            const progress = ((value - 10) / (100 - 10)) * 100;
-            document.getElementById('slPipsSlider').style.setProperty('--progress', progress + '%');
-            
-            updateRiskReward();
-        }
 
         function updateRiskReward() {
             const ratio = selectedTpPips / selectedSlPips;
@@ -1782,6 +1811,149 @@
         const initialSlProgress = ((selectedSlPips - 10) / (100 - 10)) * 100;
         document.getElementById('tpPipsSlider').style.setProperty('--progress', initialTpProgress + '%');
         document.getElementById('slPipsSlider').style.setProperty('--progress', initialSlProgress + '%');
+
+        // BTC価格管理
+        let currentBtcPrice = 0;
+
+        // Coinbase Pro APIからBTC価格を取得
+        async function fetchBtcPrice() {
+            try {
+                const response = await fetch('https://api.exchange.coinbase.com/products/BTC-USD/ticker');
+                const data = await response.json();
+                const price = parseFloat(data.price);
+                
+                if (price && price > 0) {
+                    currentBtcPrice = price;
+                    document.getElementById('currentBtcPrice').textContent = '$' + price.toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                    
+                    // 価格レベルを更新
+                    updatePriceLevels();
+                } else {
+                    console.error('Invalid price data received');
+                }
+            } catch (error) {
+                console.error('Error fetching BTC price:', error);
+                document.getElementById('currentBtcPrice').textContent = '$--,---';
+            }
+        }
+
+        // 価格レベルを計算して更新
+        function updatePriceLevels() {
+            if (currentBtcPrice <= 0 || !selectedDirection) {
+                document.getElementById('tpPriceLevel').textContent = '$--,---';
+                document.getElementById('slPriceLevel').textContent = '$--,---';
+                return;
+            }
+
+            let tpPrice, slPrice;
+            
+            if (selectedDirection === 'buy') {
+                // 買いの場合：TP = 現在価格 + TP pips, SL = 現在価格 - SL pips
+                tpPrice = currentBtcPrice + selectedTpPips;
+                slPrice = currentBtcPrice - selectedSlPips;
+            } else {
+                // 売りの場合：TP = 現在価格 - TP pips, SL = 現在価格 + SL pips
+                tpPrice = currentBtcPrice - selectedTpPips;
+                slPrice = currentBtcPrice + selectedSlPips;
+            }
+
+            // 価格を表示（小数点2桁表示）
+            document.getElementById('tpPriceLevel').textContent = '$' + tpPrice.toLocaleString('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+            document.getElementById('slPriceLevel').textContent = '$' + slPrice.toLocaleString('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+
+        // updateTpPips関数を拡張
+        function updateTpPips(value) {
+            selectedTpPips = parseInt(value);
+            document.getElementById('tpPipsValue').textContent = selectedTpPips + ' pips';
+            updateRiskReward();
+            updatePriceLevels();
+            
+            // スライダーの実際の幅を取得してプログレスバーを正確に計算
+            const slider = document.getElementById('tpPipsSlider');
+            const sliderRect = slider.getBoundingClientRect();
+            const thumbWidth = 28; // つまみの幅
+            const trackWidth = sliderRect.width - thumbWidth; // 実際のトラック幅
+            
+            const progress = ((selectedTpPips - 100) / (10000 - 100));
+            const progressWidth = trackWidth * progress;
+            
+            document.getElementById('tpProgressBar').style.width = progressWidth + 'px';
+        }
+
+        // updateSlPips関数を拡張
+        function updateSlPips(value) {
+            selectedSlPips = parseInt(value);
+            document.getElementById('slPipsValue').textContent = selectedSlPips + ' pips';
+            updateRiskReward();
+            updatePriceLevels();
+            
+            // スライダーの実際の幅を取得してプログレスバーを正確に計算
+            const slider = document.getElementById('slPipsSlider');
+            const sliderRect = slider.getBoundingClientRect();
+            const thumbWidth = 28; // つまみの幅
+            const trackWidth = sliderRect.width - thumbWidth; // 実際のトラック幅
+            
+            const progress = ((selectedSlPips - 100) / (10000 - 100));
+            const progressWidth = trackWidth * progress;
+            
+            document.getElementById('slProgressBar').style.width = progressWidth + 'px';
+        }
+
+        // selectDirection関数を拡張
+        function selectDirection(direction) {
+            selectedDirection = direction;
+            
+            // ボタンのアクティブ状態を更新
+            document.querySelectorAll('.dir-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            if (direction === 'buy') {
+                document.querySelector('.dir-btn.buy').classList.add('active');
+            } else {
+                document.querySelector('.dir-btn.sell').classList.add('active');
+            }
+            
+            // 計算ボタンを有効化
+            document.getElementById('calcButton').disabled = false;
+            
+            // 価格レベルを更新
+            updatePriceLevels();
+        }
+
+        // 初期化：プログレスバーを設定
+        function initializeSliders() {
+            // DOM要素が完全にロードされてから実行
+            setTimeout(() => {
+                updateTpPips(100); // 初期値100pips
+                updateSlPips(100); // 初期値100pips
+            }, 100);
+        }
+
+        // ウィンドウリサイズ時の再計算
+        window.addEventListener('resize', () => {
+            setTimeout(() => {
+                updateTpPips(selectedTpPips);
+                updateSlPips(selectedSlPips);
+            }, 50);
+        });
+
+        // 初期化：BTC価格を取得し、定期更新を開始
+        fetchBtcPrice();
+        initializeSliders();
+        
+        // 10秒ごとに価格を更新（取引所データなのでより頻繁に）
+        setInterval(fetchBtcPrice, 10000);
 
     </script>
 </body>
