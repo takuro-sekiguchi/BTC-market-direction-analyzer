@@ -19,9 +19,9 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
-            padding: 80px 30px 20px 280px; /* サイドメニュー分の左パディング追加 */
+            padding: 80px 20px 20px 240px; /* サイドメニュー分の左パディング調整 */
         }
 
         /* サイドメニュー */
@@ -29,7 +29,7 @@
             position: fixed;
             top: 60px; /* ヘッダー高さ分下げる */
             left: 0;
-            width: 250px;
+            width: 220px;
             height: calc(100vh - 60px);
             background: #0f1722;
             border-right: 1px solid #1a2332;
@@ -80,17 +80,6 @@
             font-size: 16px;
         }
 
-        .sidebar-badge {
-            margin-left: auto;
-            background: #ff3b3b;
-            color: white;
-            font-size: 10px;
-            font-weight: bold;
-            padding: 2px 6px;
-            border-radius: 10px;
-            min-width: 16px;
-            text-align: center;
-        }
 
         /* サブメニュー */
         .sidebar-submenu {
@@ -561,7 +550,8 @@
         }
 
         .dir-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
 
         .dir-btn.buy {
@@ -569,9 +559,9 @@
         }
 
         .dir-btn.buy.active {
-            background: #00ff0020;
+            background: linear-gradient(135deg, #00ff0015, #00ff0008);
             border-color: #00ff00;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            box-shadow: 0 0 12px rgba(0, 255, 0, 0.2);
         }
 
         .dir-btn.sell {
@@ -579,9 +569,9 @@
         }
 
         .dir-btn.sell.active {
-            background: #ff3b3b20;
+            background: linear-gradient(135deg, #ff3b3b15, #ff3b3b08);
             border-color: #ff3b3b;
-            box-shadow: 0 0 20px rgba(255, 59, 59, 0.3);
+            box-shadow: 0 0 12px rgba(255, 59, 59, 0.2);
         }
 
         /* Pips選択 */
@@ -593,27 +583,27 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .pips-value {
-            font-size: 28px;
-            font-weight: bold;
+            font-size: 16px;
+            font-weight: 700;
             color: #00d4ff;
         }
 
         .slider-container {
             position: relative;
-            margin-bottom: 30px;
-            padding: 10px 5px;
-            background: rgba(26, 35, 50, 0.3);
-            border-radius: 12px;
-            border: 1px solid rgba(42, 58, 74, 0.5);
+            margin-bottom: 12px;
+            padding: 8px 6px;
+            background: rgba(26, 35, 50, 0.2);
+            border-radius: 8px;
+            border: 1px solid rgba(42, 58, 74, 0.3);
         }
 
         .pips-slider {
             width: 100%;
-            height: 40px;
+            height: 32px;
             -webkit-appearance: none;
             appearance: none;
             background: transparent;
@@ -624,25 +614,25 @@
 
         .pips-slider::-webkit-slider-track {
             width: 100%;
-            height: 16px;
+            height: 12px;
             background: linear-gradient(to right, #1a2332 0%, #2a3a4a 50%, #3a4a5a 100%);
-            border-radius: 8px;
-            border: 2px solid #0a1220;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+            border-radius: 6px;
+            border: 1px solid #0a1220;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
         }
 
         .pips-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 36px;
-            height: 36px;
+            width: 28px;
+            height: 28px;
             background: linear-gradient(145deg, #00d4ff, #0099ff);
-            border: 3px solid #ffffff;
+            border: 2px solid #ffffff;
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.6), 0 2px 6px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 2px 8px rgba(0, 212, 255, 0.4), 0 1px 4px rgba(0, 0, 0, 0.2);
             transition: all 0.2s ease;
-            margin-top: -10px;
+            margin-top: -8px;
         }
 
         .pips-slider::-webkit-slider-thumb:hover {
@@ -687,9 +677,10 @@
             display: flex;
             justify-content: space-between;
             color: #7a8a9a;
-            font-size: 12px;
-            margin-top: 8px;
-            padding: 0 5px;
+            font-size: 10px;
+            margin-top: 6px;
+            padding: 0 4px;
+            font-weight: 500;
         }
 
         /* スライダーのプログレスバー効果 */
@@ -709,29 +700,31 @@
         /* 勝率計算結果 */
         .result-section {
             background: linear-gradient(135deg, #1a2332 0%, #0f1722 100%);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            border: 2px solid #00d4ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            border: 1px solid #00d4ff;
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.1);
         }
 
         .result-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
+            gap: 16px;
             text-align: center;
         }
 
         .result-item h3 {
             color: #7a8a9a;
-            font-size: 16px;
-            margin-bottom: 10px;
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 600;
         }
 
         .result-value {
-            font-size: 48px;
-            font-weight: bold;
-            margin-bottom: 10px;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 6px;
         }
 
         .win-rate {
@@ -751,23 +744,26 @@
         .calc-button {
             display: block;
             width: 100%;
-            max-width: 400px;
-            margin: 0 auto 30px;
-            padding: 20px;
-            background: #00d4ff;
-            color: #0a0e1a;
+            max-width: 320px;
+            margin: 16px auto 0;
+            padding: 16px;
+            background: linear-gradient(135deg, #00d4ff, #0099ff);
+            color: #ffffff;
             border: none;
-            border-radius: 10px;
-            font-size: 20px;
-            font-weight: bold;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 212, 255, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .calc-button:hover {
-            background: #0099ff;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.5);
+            background: linear-gradient(135deg, #00ffff, #00d4ff);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(0, 212, 255, 0.4);
         }
 
         .calc-button:disabled {
@@ -776,6 +772,7 @@
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
+            opacity: 0.6;
         }
 
         /* 追加情報 */
@@ -808,12 +805,28 @@
         /* 大画面対応 */
         @media (min-width: 1600px) {
             .container {
-                max-width: 1600px;
-                padding: 80px 40px 20px 290px;
+                max-width: 1800px;
+                padding: 80px 30px 20px 250px;
             }
         }
 
         /* レスポンシブ */
+        @media (max-width: 1200px) {
+            /* 中画面では2カラムレイアウトを縦に変更 */
+            .container > div:first-of-type {
+                grid-template-columns: 1fr !important;
+                gap: 20px !important;
+            }
+            
+            .container > div:first-of-type > div:first-child {
+                order: 1;
+            }
+            
+            .container > div:first-of-type > div:last-child {
+                order: 2;
+            }
+        }
+
         @media (max-width: 768px) {
             /* ハンバーガーメニューボタンを表示 */
             .menu-toggle {
@@ -856,6 +869,11 @@
                 font-size: 13px;
             }
 
+            /* 2カラムレイアウトを縦並びに */
+            .container > div:first-of-type {
+                grid-template-columns: 1fr !important;
+                gap: 15px !important;
+            }
 
             .score-display {
                 font-size: 48px;
@@ -863,6 +881,11 @@
 
             .result-grid {
                 grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .result-value {
+                font-size: 28px;
             }
 
             .info-grid {
@@ -871,6 +894,17 @@
 
             .direction-buttons {
                 grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .dir-btn {
+                padding: 14px 10px;
+                font-size: 14px;
+            }
+            
+            /* チャートの高さをモバイルで調整 */
+            .container div[style*="height: 600"] {
+                height: 400px !important;
             }
         }
     </style>
@@ -942,8 +976,6 @@
                         <a href="#" class="sidebar-link" onclick="toggleSubmenu(this)">
                             <span class="sidebar-icon">📄</span>
                             AIレポート
-                            <span class="sidebar-badge" style="background: #00d4ff;">New</span>
-                            <span class="sidebar-toggle">▶</span>
                         </a>
                         <ul class="sidebar-submenu">
                             <li><a href="#" class="sidebar-link"><span class="sidebar-icon">📅</span>デイリーレポート</a></li>
@@ -963,8 +995,6 @@
                         <a href="#" class="sidebar-link" onclick="toggleSubmenu(this)">
                             <span class="sidebar-icon">🎯</span>
                             アラート
-                            <span class="sidebar-badge">3</span>
-                            <span class="sidebar-toggle">▶</span>
                         </a>
                         <ul class="sidebar-submenu">
                             <li><a href="#" class="sidebar-link"><span class="sidebar-icon">📢</span>アクティブアラート (3)</a></li>
@@ -982,7 +1012,6 @@
                         <a href="#" class="sidebar-link" onclick="toggleSubmenu(this)">
                             <span class="sidebar-icon">💼</span>
                             マイアカウント
-                            <span class="sidebar-toggle">▶</span>
                         </a>
                         <ul class="sidebar-submenu">
                             <li><a href="#" class="sidebar-link"><span class="sidebar-icon">📊</span>分析履歴</a></li>
@@ -1002,7 +1031,6 @@
                         <a href="#" class="sidebar-link" onclick="toggleSubmenu(this)">
                             <span class="sidebar-icon">📚</span>
                             学習センター
-                            <span class="sidebar-toggle">▶</span>
                         </a>
                         <ul class="sidebar-submenu">
                             <li><a href="#" class="sidebar-link"><span class="sidebar-icon">🎓</span>基本ガイド</a></li>
@@ -1021,7 +1049,6 @@
                         <a href="#" class="sidebar-link" onclick="toggleSubmenu(this)">
                             <span class="sidebar-icon">🆘</span>
                             サポート
-                            <span class="sidebar-toggle">▶</span>
                         </a>
                         <ul class="sidebar-submenu">
                             <li><a href="#" class="sidebar-link"><span class="sidebar-icon">💬</span>チャットサポート</a></li>
@@ -1033,57 +1060,91 @@
             </div>
         </nav>
 
-        <!-- TradingViewチャート -->
-        <div style="background: #1a2332; border-radius: 20px; padding: 20px; margin-bottom: 30px;">
-            <h3 style="color: #00d4ff; margin-bottom: 20px;">BTC/USD チャート</h3>
-            <!-- TradingView Widget BEGIN -->
-            <div class="tradingview-widget-container">
-                <div id="tradingview_btc"></div>
-                <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-                <script type="text/javascript">
-                new TradingView.widget(
-                {
-                    "width": "100%",
-                    "height": 400,
-                    "symbol": "BITSTAMP:BTCUSD",
-                    "interval": "60",
-                    "timezone": "Asia/Tokyo",
-                    "theme": "dark",
-                    "style": "1",
-                    "locale": "ja",
-                    "enable_publishing": false,
-                    "allow_symbol_change": true,
-                    "container_id": "tradingview_btc"
-                }
-                );
-                </script>
+        <!-- 2カラムレイアウト: チャート + シミュレーションツール -->
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px; margin-bottom: 30px;">
+            <!-- 左カラム: TradingViewチャート -->
+            <div style="background: #1a2332; border-radius: 20px; padding: 20px;">
+                <h3 style="color: #00d4ff; margin-bottom: 20px;">BTC/USD チャート</h3>
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                    <div id="tradingview_btc"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                    <script type="text/javascript">
+                    new TradingView.widget(
+                    {
+                        "width": "100%",
+                        "height": 600,
+                        "symbol": "BITSTAMP:BTCUSD",
+                        "interval": "60",
+                        "timezone": "Asia/Tokyo",
+                        "theme": "dark",
+                        "style": "1",
+                        "locale": "ja",
+                        "enable_publishing": false,
+                        "allow_symbol_change": true,
+                        "container_id": "tradingview_btc",
+                        "drawings_access": {
+                            "type": "black",
+                            "tools": [
+                                { "name": "Regression Trend" },
+                                { "name": "Trend Line" },
+                                { "name": "Horizontal Line" },
+                                { "name": "Vertical Line" },
+                                { "name": "Cross Line" },
+                                { "name": "Rectangle" },
+                                { "name": "Circle" },
+                                { "name": "Arrow" },
+                                { "name": "Text" },
+                                { "name": "Note" },
+                                { "name": "Fibonacci Retracement" },
+                                { "name": "Fibonacci Extension" },
+                                { "name": "Price Range" },
+                                { "name": "Measure" }
+                            ]
+                        },
+                        "enabled_features": [
+                            "study_templates",
+                            "use_localstorage_for_settings",
+                            "save_chart_properties_to_local_storage",
+                            "chart_property_page_style",
+                            "disable_resolution_rebuild",
+                            "chart_template"
+                        ],
+                        "disabled_features": [
+                            "popup_hints"
+                        ],
+                        "toolbar_bg": "#1a2332",
+                        "hide_side_toolbar": false
+                    }
+                    );
+                    </script>
+                </div>
+                <!-- TradingView Widget END -->
             </div>
-            <!-- TradingView Widget END -->
-        </div>
 
-        <!-- ユーザー選択セクション -->
+            <!-- 右カラム: 投資シミュレーションツール -->
         <div class="user-selection">
             <h3 class="selection-title">投資シミュレーションツール</h3>
             
             <!-- 方向選択 -->
             <div class="direction-buttons">
                 <button class="dir-btn buy" onclick="selectDirection('buy')">
-                    <div style="font-size: 36px;">↑</div>
-                    <div>買い（ロング）</div>
+                    <div style="font-size: 22px; margin-bottom: 4px;">↑</div>
+                    <div style="font-size: 13px;">買い（ロング）</div>
                 </button>
                 <button class="dir-btn sell" onclick="selectDirection('sell')">
-                    <div style="font-size: 36px;">↓</div>
-                    <div>売り（ショート）</div>
+                    <div style="font-size: 22px; margin-bottom: 4px;">↓</div>
+                    <div style="font-size: 13px;">売り（ショート）</div>
                 </button>
             </div>
 
             <!-- TP/SL Pips選択 -->
             <div class="pips-selection">
                 <!-- TP設定 -->
-                <div style="margin-bottom: 25px;">
+                <div style="margin-bottom: 16px;">
                     <div class="pips-label">
-                        <span style="color: #7a8a9a;">利確幅（TP）</span>
-                        <span class="pips-value" id="tpPipsValue">50 pips</span>
+                        <span style="color: #7a8a9a; font-size: 13px;">利確幅（TP）</span>
+                        <span class="pips-value" id="tpPipsValue" style="font-size: 14px; font-weight: 600;">50 pips</span>
                     </div>
                     <div class="slider-container">
                         <input type="range" class="pips-slider" id="tpPipsSlider" 
@@ -1091,19 +1152,19 @@
                                oninput="updateTpPips(this.value)">
                     </div>
                     <div class="slider-labels">
-                        <span>10 pips</span>
-                        <span>30 pips</span>
-                        <span>50 pips</span>
-                        <span>70 pips</span>
-                        <span>100 pips</span>
+                        <span>10</span>
+                        <span>30</span>
+                        <span>50</span>
+                        <span>70</span>
+                        <span>100</span>
                     </div>
                 </div>
 
                 <!-- SL設定 -->
-                <div style="margin-bottom: 25px;">
+                <div style="margin-bottom: 16px;">
                     <div class="pips-label">
-                        <span style="color: #7a8a9a;">損切り幅（SL）</span>
-                        <span class="pips-value" id="slPipsValue">20 pips</span>
+                        <span style="color: #7a8a9a; font-size: 13px;">損切り幅（SL）</span>
+                        <span class="pips-value" id="slPipsValue" style="font-size: 14px; font-weight: 600;">20 pips</span>
                     </div>
                     <div class="slider-container">
                         <input type="range" class="pips-slider" id="slPipsSlider" 
@@ -1111,85 +1172,86 @@
                                oninput="updateSlPips(this.value)">
                     </div>
                     <div class="slider-labels">
-                        <span>10 pips</span>
-                        <span>30 pips</span>
-                        <span>50 pips</span>
-                        <span>70 pips</span>
-                        <span>100 pips</span>
+                        <span>10</span>
+                        <span>30</span>
+                        <span>50</span>
+                        <span>70</span>
+                        <span>100</span>
                     </div>
                 </div>
 
                 <!-- リスクリワード比表示 -->
-                <div style="background: #0f1722; padding: 15px; border-radius: 10px; text-align: center;">
-                    <div style="color: #7a8a9a; font-size: 14px; margin-bottom: 5px;">リスクリワード比</div>
-                    <div style="font-size: 24px; font-weight: bold; color: #00d4ff;" id="riskRewardRatio">2.5 : 1</div>
+                <div style="background: #0f1722; padding: 12px; border-radius: 8px; text-align: center; border: 1px solid rgba(42, 58, 74, 0.4);">
+                    <div style="color: #7a8a9a; font-size: 12px; margin-bottom: 4px;">リスクリワード比</div>
+                    <div style="font-size: 18px; font-weight: 700; color: #00d4ff;" id="riskRewardRatio">2.5 : 1</div>
                 </div>
             </div>
 
-            <button class="calc-button" id="calcButton" onclick="calculatePatternAnalysis()" disabled>
-    分析
+            <button class="calc-button" id="calcButton" onclick="calculatePatternAnalysis()" disabled style="padding: 14px; font-size: 15px; font-weight: 600; margin-bottom: 16px;">
+                分析実行
             </button>
             
             <!-- クレジット消費説明 -->
-            <div style="text-align: center; margin-top: 15px; padding: 12px; background: rgba(0, 212, 255, 0.1); border-radius: 8px; border: 1px solid rgba(0, 212, 255, 0.2);">
-                <div style="color: #00d4ff; font-size: 14px; font-weight: 500;">
-                    <span style="margin-right: 8px;">💳</span>この分析には1クレジットが消費されます
+            <div style="text-align: center; margin-top: 8px; padding: 10px; background: rgba(0, 212, 255, 0.08); border-radius: 6px; border: 1px solid rgba(0, 212, 255, 0.15);">
+                <div style="color: #00d4ff; font-size: 12px; font-weight: 500;">
+                    <span style="margin-right: 6px;">💳</span>この分析には1クレジットが消費されます
                 </div>
-                <div style="color: #7a8a9a; font-size: 12px; margin-top: 4px;">
+                <div style="color: #7a8a9a; font-size: 11px; margin-top: 3px;">
                     分析実行後、残りクレジット数が更新されます
                 </div>
             </div>
-        </div>
 
-
-        <!-- 勝率計算結果 -->
-        <div class="result-section" id="resultSection" style="display: none;">
-            <h3 style="text-align: center; color: #00d4ff; margin-bottom: 30px; font-size: 24px;">
-分析結果
-            </h3>
-            <div class="result-grid">
-                <div class="result-item">
-                    <h3>ターゲット到達パターン</h3>
-                    <div class="result-value win-rate" id="tpRate">68%</div>
+            <!-- 分析結果セクション（右カラム内） -->
+            <div class="result-section" id="resultSection" style="display: none; margin-top: 20px;">
+                <h3 style="text-align: center; color: #00d4ff; margin-bottom: 20px; font-size: 18px;">
+                    分析結果
+                </h3>
+                <div class="result-grid">
+                    <div class="result-item">
+                        <h3>ターゲット到達パターン</h3>
+                        <div class="result-value win-rate" id="tpRate">68%</div>
+                    </div>
+                    <div class="result-item">
+                        <h3>ストップ到達パターン</h3>
+                        <div class="result-value loss-rate" id="slRate">32%</div>
+                    </div>
                 </div>
-                <div class="result-item">
-                    <h3>ストップ到達パターン</h3>
-                    <div class="result-value loss-rate" id="slRate">32%</div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: #0f1722; border-radius: 8px;">
+                    <h4 style="color: #00d4ff; margin-bottom: 12px; font-size: 14px;">詳細分析</h4>
+                    <div style="display: grid; gap: 8px; color: #c9d1d9; font-size: 12px;">
+                        <div>• 過去データ件数: <span style="color: #00d4ff;">152件</span></div>
+                        <div>• データパターン一致: <span style="color: #00ff00;">○</span></div>
+                        <div>• リスクリワード比: <span style="color: #00d4ff;" id="rrAnalysis">2.5:1</span></div>
+                        <div>• 期待値: <span style="color: #00d4ff;" id="expectedValue">+12.6 pips</span></div>
+                        <div>• 予想時間: <span style="color: #00d4ff;">約2.5時間</span></div>
+                    </div>
                 </div>
             </div>
-            
-            <div style="margin-top: 30px; padding: 20px; background: #0f1722; border-radius: 10px;">
-                <h4 style="color: #00d4ff; margin-bottom: 15px;">詳細分析</h4>
-                <div style="display: grid; gap: 10px; color: #c9d1d9;">
-                    <div>• 過去データ件数: <span style="color: #00d4ff;">152件</span></div>
-                    <div>• 現在のデータパターンと一致: <span style="color: #00ff00;">○</span></div>
-                    <div>• リスクリワード比: <span style="color: #00d4ff;" id="rrAnalysis">2.5:1 良好</span></div>
-                    <div>• シミュレーション結果: <span style="color: #00d4ff;" id="expectedValue">+12.6 pips</span></div>
-                    <div>• 予想所要時間: <span style="color: #00d4ff;">約2.5時間</span></div>
-                </div>
-            </div>
         </div>
+        
+        </div> <!-- 2カラムレイアウト終了 -->
 
         <!-- 相場状況 -->
-        <div style="background: #1a2332; border-radius: 15px; padding: 25px; margin-bottom: 30px;">
-            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
-                <h3 style="color: #00d4ff; margin: 0;">相場状況</h3>
-                <span style="color: #00ff00; font-size: 16px; font-weight: bold;">トレンド相場</span>
+        <div style="background: #1a2332; border-radius: 12px; padding: 20px; margin-bottom: 24px; border: 1px solid rgba(42, 58, 74, 0.3);">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                <h3 style="color: #00d4ff; margin: 0; font-size: 16px; font-weight: 600;">相場状況</h3>
+                <span style="color: #00ff00; font-size: 13px; font-weight: 600; padding: 3px 8px; background: rgba(0, 255, 0, 0.1); border-radius: 12px; border: 1px solid rgba(0, 255, 0, 0.2);">トレンド相場</span>
             </div>
             
             <!-- 相場指標 -->
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;">
-                <div style="background: #0f1722; border-radius: 10px; padding: 15px; text-align: center;">
-                    <div style="color: #7a8a9a; font-size: 12px; margin-bottom: 5px;">ATR（平均変動幅）</div>
-                    <div style="color: #00d4ff; font-size: 20px; font-weight: bold; margin-bottom: 2px;">$425</div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px;">
+                <div style="background: #0f1722; border-radius: 8px; padding: 12px; text-align: center; border: 1px solid rgba(42, 58, 74, 0.2);">
+                    <div style="color: #7a8a9a; font-size: 11px; margin-bottom: 4px; font-weight: 500;">ATR（平均変動幅）</div>
+                    <div style="color: #00d4ff; font-size: 16px; font-weight: 700;">$425</div>
                 </div>
-                <div style="background: #0f1722; border-radius: 10px; padding: 15px; text-align: center;">
-                    <div style="color: #7a8a9a; font-size: 12px; margin-bottom: 5px;">類似度スコア</div>
-                    <div style="color: #00ff00; font-size: 20px; font-weight: bold; margin-bottom: 2px;">87%</div>
+                <div style="background: #0f1722; border-radius: 8px; padding: 12px; text-align: center; border: 1px solid rgba(42, 58, 74, 0.2);">
+                    <div style="color: #7a8a9a; font-size: 11px; margin-bottom: 4px; font-weight: 500;">類似度スコア</div>
+                    <div style="color: #00ff00; font-size: 16px; font-weight: 700;">87%</div>
                 </div>
-                <div style="background: #0f1722; border-radius: 10px; padding: 15px; text-align: center;">
-                    <div style="color: #7a8a9a; font-size: 12px; margin-bottom: 5px;">トレンド強度</div>
-                    <div style="color: #00ff00; font-size: 20px; font-weight: bold; margin-bottom: 2px;">強い</div>
+                <div style="background: #0f1722; border-radius: 8px; padding: 12px; text-align: center; border: 1px solid rgba(42, 58, 74, 0.2);">
+                    <div style="color: #7a8a9a; font-size: 11px; margin-bottom: 4px; font-weight: 500;">トレンド強度</div>
+                    <div style="color: #00ff00; font-size: 16px; font-weight: 700;">強い</div>
                 </div>
             </div>
             
