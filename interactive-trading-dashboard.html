@@ -1456,7 +1456,7 @@
         </div>
 
         <!-- AI総合解説 -->
-        <div style="background: #1a2332; border-left: 4px solid #00d4ff; border-radius: 15px; padding: 25px;">
+        <div style="background: #1a2332; border-radius: 15px; padding: 25px;">
             <h3 style="color: #00d4ff; margin-bottom: 15px;">AI総合解説</h3>
             <p style="color: #c9d1d9; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
                 現在のBTC市場は明確な上昇トレンド環境にあります。方向性スコア+44は買い優勢を示しており、ETFへの継続的な資金流入（+$285M）と大口注文の買い集中により需給バランスは良好です。類似度スコア87%は過去の成功パターンと高い一致率を示しており、トレード精度向上が期待できます。
@@ -1476,64 +1476,11 @@
         </div>
 
         <!-- スコア構成要素 -->
-        <h3 style="color: #00d4ff; margin-bottom: 20px;">スコア構成要素</h3>
+        <h3 style="color: #00d4ff; margin: 40px 0 20px 0;">スコア構成要素</h3>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px;">
-            <!-- 時間足別スコア -->
-            <div style="background: #1a2332; border-radius: 15px; padding: 20px; transition: all 0.3s;" 
-                 onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.3)'"
-                 onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                    <span style="color: #00d4ff;">時間足別スコア</span>
-                    <span style="font-size: 24px; font-weight: bold; color: #00ff00;">+44</span>
-                </div>
-                <div style="background: #0f1722; height: 30px; border-radius: 15px; overflow: hidden; margin-bottom: 10px;">
-                    <div style="height: 100%; width: 72%; background: linear-gradient(to right, #00d4ff, #00ff00); transition: width 0.5s;"></div>
-                </div>
-                <div style="color: #7a8a9a; font-size: 14px; margin-bottom: 15px;">多時間足総合分析</div>
-                
-                <!-- ミニ時間足スコアグリッド -->
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 15px;">
-                    <!-- 5分足 -->
-                    <div style="background: #0f1722; border-radius: 8px; padding: 8px; text-align: center;">
-                        <div style="color: #7a8a9a; font-size: 10px; margin-bottom: 5px;">5分</div>
-                        <div style="font-size: 14px; font-weight: bold; color: #ff3b3b;">-8</div>
-                    </div>
-                    <!-- 15分足 -->
-                    <div style="background: #0f1722; border-radius: 8px; padding: 8px; text-align: center;">
-                        <div style="color: #7a8a9a; font-size: 10px; margin-bottom: 5px;">15分</div>
-                        <div style="font-size: 14px; font-weight: bold; color: #ffdd00;">+12</div>
-                    </div>
-                    <!-- 1時間足 -->
-                    <div style="background: #0f1722; border-radius: 8px; padding: 8px; text-align: center;">
-                        <div style="color: #7a8a9a; font-size: 10px; margin-bottom: 5px;">1時間</div>
-                        <div style="font-size: 14px; font-weight: bold; color: #00ff00;">+35</div>
-                    </div>
-                    <!-- 4時間足 -->
-                    <div style="background: #0f1722; border-radius: 8px; padding: 8px; text-align: center;">
-                        <div style="color: #7a8a9a; font-size: 10px; margin-bottom: 5px;">4時間</div>
-                        <div style="font-size: 14px; font-weight: bold; color: #00ff00;">+48</div>
-                    </div>
-                    <!-- 日足 -->
-                    <div style="background: #0f1722; border-radius: 8px; padding: 8px; text-align: center;">
-                        <div style="color: #7a8a9a; font-size: 10px; margin-bottom: 5px;">日足</div>
-                        <div style="font-size: 14px; font-weight: bold; color: #00ff00;">+62</div>
-                    </div>
-                    <!-- 週足 -->
-                    <div style="background: #0f1722; border-radius: 8px; padding: 8px; text-align: center;">
-                        <div style="color: #7a8a9a; font-size: 10px; margin-bottom: 5px;">週足</div>
-                        <div style="font-size: 14px; font-weight: bold; color: #00ff00;">+70</div>
-                    </div>
-                </div>
-                
-                <div style="margin-top: 15px; padding: 15px; background: #0f1722; border-radius: 10px; font-size: 14px; line-height: 1.6; color: #c9d1d9; border-left: 3px solid #00d4ff;">
-                    上位時間足（4時間、日、週）が全て強い買いシグナルを示しており、長期トレンドは明確に上昇方向です。短期の5分足は逆張りですが、全体の方向性には影響しません。
-                </div>
-            </div>
 
             <!-- 市場資金循環 -->
-            <div style="background: #1a2332; border-radius: 15px; padding: 20px; transition: all 0.3s;" 
-                 onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.3)'"
-                 onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+            <div style="background: #1a2332; border-radius: 15px; padding: 20px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                     <span style="color: #00d4ff;">市場資金循環</span>
                     <span style="font-size: 24px; font-weight: bold; color: #00ff00;">+75</span>
@@ -1560,15 +1507,13 @@
                         <span>-1.2%</span>
                     </div>
                 </div>
-                <div style="margin-top: 15px; padding: 15px; background: #0f1722; border-radius: 10px; font-size: 14px; line-height: 1.6; color: #c9d1d9; border-left: 3px solid #00d4ff;">
+                <div style="margin-top: 15px; padding: 15px; background: #0f1722; border-radius: 10px; font-size: 14px; line-height: 1.6; color: #c9d1d9;">
                     株式市場の上昇とドル安、さらに金が売られている状況は、典型的なリスクオン相場を示しています。投資家のリスク選好姿勢が強く、株式や暗号資産などのリスク資産に資金が向かいやすい環境です。
                 </div>
             </div>
 
             <!-- BTC需給 -->
-            <div style="background: #1a2332; border-radius: 15px; padding: 20px; transition: all 0.3s;" 
-                 onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.3)'"
-                 onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+            <div style="background: #1a2332; border-radius: 15px; padding: 20px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                     <span style="color: #00d4ff;">BTC需給</span>
                     <span style="font-size: 24px; font-weight: bold; color: #00ff00;">+85</span>
@@ -1595,15 +1540,13 @@
                         <span>420 EH/s</span>
                     </div>
                 </div>
-                <div style="margin-top: 15px; padding: 15px; background: #0f1722; border-radius: 10px; font-size: 14px; line-height: 1.6; color: #c9d1d9; border-left: 3px solid #00d4ff;">
+                <div style="margin-top: 15px; padding: 15px; background: #0f1722; border-radius: 10px; font-size: 14px; line-height: 1.6; color: #c9d1d9;">
                     ETFへの大規模な資金流入と取引所からのBTC流出が同時に起きており、需給バランスは極めて良好です。長期保有者の増加は売り圧力の低下を意味し、中期的な価格上昇を強く支持します。
                 </div>
             </div>
 
             <!-- マクロ環境 -->
-            <div style="background: #1a2332; border-radius: 15px; padding: 20px; transition: all 0.3s;" 
-                 onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.3)'"
-                 onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+            <div style="background: #1a2332; border-radius: 15px; padding: 20px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                     <span style="color: #00d4ff;">マクロ環境</span>
                     <span style="font-size: 24px; font-weight: bold; color: #00ff00;">+60</span>
@@ -1626,15 +1569,13 @@
                         <span>据え置き 85%</span>
                     </div>
                 </div>
-                <div style="margin-top: 15px; padding: 15px; background: #0f1722; border-radius: 10px; font-size: 14px; line-height: 1.6; color: #c9d1d9; border-left: 3px solid #00d4ff;">
+                <div style="margin-top: 15px; padding: 15px; background: #0f1722; border-radius: 10px; font-size: 14px; line-height: 1.6; color: #c9d1d9;">
                     インフレ率の低下により利上げサイクルは終了局面にあり、市場は次の利下げを織り込み始めています。この金融政策の転換期待はリスク資産全般にとって追い風となっています。
                 </div>
             </div>
 
             <!-- 市場心理 -->
-            <div style="background: #1a2332; border-radius: 15px; padding: 20px; transition: all 0.3s;" 
-                 onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.3)'"
-                 onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+            <div style="background: #1a2332; border-radius: 15px; padding: 20px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                     <span style="color: #00d4ff;">市場心理</span>
                     <span style="font-size: 24px; font-weight: bold; color: #ffdd00;">+40</span>
@@ -1653,15 +1594,13 @@
                         <span>72% ポジティブ</span>
                     </div>
                 </div>
-                <div style="margin-top: 15px; padding: 15px; background: #0f1722; border-radius: 10px; font-size: 14px; line-height: 1.6; color: #c9d1d9; border-left: 3px solid #00d4ff;">
+                <div style="margin-top: 15px; padding: 15px; background: #0f1722; border-radius: 10px; font-size: 14px; line-height: 1.6; color: #c9d1d9;">
                     市場は楽観的ですが極端な過熱感はなく、健全な上昇局面にあります。SNSでのポジティブな議論が継続しており、新規参加者の流入が期待できる状況です。
                 </div>
             </div>
 
             <!-- ポジション構造 -->
-            <div style="background: #1a2332; border-radius: 15px; padding: 20px; transition: all 0.3s;" 
-                 onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.3)'"
-                 onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+            <div style="background: #1a2332; border-radius: 15px; padding: 20px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                     <span style="color: #00d4ff;">ポジション構造</span>
                     <span style="font-size: 24px; font-weight: bold; color: #ff6b6b;">-20</span>
@@ -1684,15 +1623,13 @@
                         <span>+8.5%</span>
                     </div>
                 </div>
-                <div style="margin-top: 15px; padding: 15px; background: #0f1722; border-radius: 10px; font-size: 14px; line-height: 1.6; color: #c9d1d9; border-left: 3px solid #00d4ff;">
+                <div style="margin-top: 15px; padding: 15px; background: #0f1722; border-radius: 10px; font-size: 14px; line-height: 1.6; color: #c9d1d9;">
                     ロングポジションの偏りが見られ、急落時には清算による下落加速のリスクがあります。ただしFunding Rateは極端ではなく、現時点では管理可能なレベルに留まっています。
                 </div>
             </div>
 
             <!-- クジラ動向 -->
-            <div style="background: #1a2332; border-radius: 15px; padding: 20px; transition: all 0.3s;" 
-                 onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.3)'"
-                 onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+            <div style="background: #1a2332; border-radius: 15px; padding: 20px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                     <span style="color: #00d4ff;">クジラ動向</span>
                     <span style="font-size: 24px; font-weight: bold; color: #00ff00;">+55</span>
@@ -1711,7 +1648,7 @@
                         <span>通常レベル</span>
                     </div>
                 </div>
-                <div style="margin-top: 15px; padding: 15px; background: #0f1722; border-radius: 10px; font-size: 14px; line-height: 1.6; color: #c9d1d9; border-left: 3px solid #00d4ff;">
+                <div style="margin-top: 15px; padding: 15px; background: #0f1722; border-radius: 10px; font-size: 14px; line-height: 1.6; color: #c9d1d9;">
                     クジラ（大口保有者）は着実にBTCを蓄積しており、売却の兆候は見られません。これは長期的な価格上昇への確信を示しており、相場の底堅さを支えています。
                 </div>
             </div>
