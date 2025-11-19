@@ -998,6 +998,19 @@
             50% { width: 100%; transform: translateX(0%); }
             100% { width: 100%; transform: translateX(100%); }
         }
+
+        /* TradingView OHLC値のみ非表示（シンボル名は表示を維持） */
+        .tv-legend__values,
+        .chart-markup-table .series-ohlc,
+        [data-name="legend-source-item"] .js-legend-series-item:not(.js-legend-title) {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        /* 出来高表示を非表示 */
+        [class*="volume"] {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
@@ -1227,10 +1240,25 @@
                             "popup_hints",
                             "header_saveload",
                             "header_screenshot",
-                            "header_undo_redo"
+                            "header_undo_redo",
+                            "display_market_status",
+                            "legend_context_menu",
+                            "show_hide_button_in_legend",
+                            "legend_widget",
+                            "volume_force_overlay"
                         ],
                         "toolbar_bg": "#1a2332",
-                        "hide_side_toolbar": false
+                        "hide_side_toolbar": false,
+                        "overrides": {
+                            "mainSeriesProperties.showCountdown": false,
+                            "mainSeriesProperties.showPrevClose": false,
+                            "paneProperties.legendProperties.showSeriesOHLC": false,
+                            "paneProperties.legendProperties.showSeriesTitle": true,
+                            "volumePaneSize": "amin",
+                            "scalesProperties.showSeriesLastValue": true,
+                            "scalesProperties.showSeriesOHLC": false
+                        },
+                        "hide_volume": true
                     }
                     );
                     </script>
