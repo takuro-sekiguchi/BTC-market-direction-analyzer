@@ -19,9 +19,144 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 80px 20px 20px 20px;
+            padding: 80px 30px 20px 280px; /* サイドメニュー分の左パディング追加 */
+        }
+
+        /* サイドメニュー */
+        .sidebar {
+            position: fixed;
+            top: 60px; /* ヘッダー高さ分下げる */
+            left: 0;
+            width: 250px;
+            height: calc(100vh - 60px);
+            background: #0f1722;
+            border-right: 1px solid #1a2332;
+            overflow-y: auto;
+            z-index: 999;
+            padding: 15px 0;
+        }
+
+        .sidebar-section {
+            margin-bottom: 15px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-item {
+            margin-bottom: 1px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            color: #c9d1d9;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-link:hover {
+            background: #1a2332;
+            color: #00d4ff;
+            border-left-color: #00d4ff;
+        }
+
+        .sidebar-link.active {
+            background: #1a2332;
+            color: #00d4ff;
+            border-left-color: #00d4ff;
+        }
+
+        .sidebar-icon {
+            margin-right: 12px;
+            font-size: 16px;
+        }
+
+        .sidebar-badge {
+            margin-left: auto;
+            background: #ff3b3b;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 10px;
+            min-width: 16px;
+            text-align: center;
+        }
+
+        /* サブメニュー */
+        .sidebar-submenu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: none;
+            background: #0a0e1a;
+        }
+
+        .sidebar-submenu.open {
+            display: block;
+        }
+
+        .sidebar-submenu .sidebar-link {
+            padding: 8px 20px 8px 52px;
+            font-size: 13px;
+            color: #7a8a9a;
+        }
+
+        .sidebar-submenu .sidebar-link:hover {
+            color: #00d4ff;
+        }
+
+        .sidebar-toggle {
+            margin-left: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-toggle.open {
+            transform: rotate(90deg);
+        }
+
+        /* ハンバーガーメニューボタン */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #c9d1d9;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px;
+            margin-right: 15px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            background: #1a2332;
+            color: #00d4ff;
+        }
+
+        /* サイドメニューオーバーレイ */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
         }
 
         /* ヘッダー */
@@ -79,46 +214,6 @@
             font-weight: 500;
         }
 
-        .user-plan {
-            color: #00d4ff;
-            font-size: 11px;
-            padding: 3px 8px;
-            background: rgba(0, 212, 255, 0.2);
-            border-radius: 10px;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-        }
-
-        /* 言語切り替え */
-        .language-switch {
-            display: flex;
-            background: #1a2332;
-            border-radius: 16px;
-            padding: 3px;
-            gap: 1px;
-        }
-
-        .lang-btn {
-            padding: 6px 12px;
-            background: transparent;
-            border: none;
-            color: #7a8a9a;
-            font-size: 12px;
-            font-weight: 500;
-            border-radius: 13px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .lang-btn.active {
-            background: #00d4ff;
-            color: #0a0e1a;
-            font-weight: 600;
-        }
-
-        .lang-btn:hover:not(.active) {
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.1);
-        }
 
         /* クレジット情報 */
         .credit-info {
@@ -140,6 +235,89 @@
             color: #00d4ff;
             font-size: 14px;
             font-weight: 600;
+        }
+
+        /* ユーザーメニュー */
+        .user-menu {
+            position: relative;
+        }
+
+        .user-menu-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #1a2332;
+            border: 2px solid #2a3a4a;
+            color: #c9d1d9;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .user-menu-btn:hover {
+            border-color: #00d4ff;
+            background: #00d4ff;
+            color: #0a0e1a;
+            transform: scale(1.05);
+        }
+
+        .user-menu-btn.active {
+            border-color: #00d4ff;
+            background: #00d4ff;
+            color: #0a0e1a;
+        }
+
+        .user-avatar {
+            font-size: 18px;
+        }
+
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 8px;
+            background: #0f1722;
+            border: 1px solid #2a3a4a;
+            border-radius: 12px;
+            padding: 8px 0;
+            min-width: 180px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            display: none;
+            z-index: 1002;
+        }
+
+        .user-dropdown.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            color: #c9d1d9;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background: #1a2332;
+            color: #00d4ff;
+        }
+
+        .dropdown-icon {
+            font-size: 16px;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: #2a3a4a;
+            margin: 8px 0;
         }
         
         /* 免責事項 */
@@ -627,15 +805,39 @@
             color: #ffffff;
         }
 
+        /* 大画面対応 */
+        @media (min-width: 1600px) {
+            .container {
+                max-width: 1600px;
+                padding: 80px 40px 20px 290px;
+            }
+        }
+
         /* レスポンシブ */
         @media (max-width: 768px) {
+            /* ハンバーガーメニューボタンを表示 */
+            .menu-toggle {
+                display: block;
+            }
+
+            /* サイドメニューを隠す */
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 1001;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
             .header {
                 padding: 10px 15px;
                 height: 50px;
             }
 
             .container {
-                padding: 70px 15px 15px 15px;
+                padding: 70px 15px 15px 15px; /* サイドメニュー用の左パディングを削除 */
             }
 
             .logo {
@@ -654,15 +856,6 @@
                 font-size: 13px;
             }
 
-            .user-plan {
-                font-size: 10px;
-                padding: 2px 6px;
-            }
-
-            .lang-btn {
-                font-size: 11px;
-                padding: 5px 10px;
-            }
 
             .score-display {
                 font-size: 48px;
@@ -686,6 +879,7 @@
     <div class="container">
         <header class="header">
             <div class="header-left">
+                <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
                 <h1 class="logo">Market Reach Analyzer</h1>
             </div>
             
@@ -696,21 +890,148 @@
                     <span class="credit-value">100/300</span>
                 </div>
                 
-                <!-- アカウント情報 -->
-                <div class="account-info">
-                    <div class="user-name">田中太郎</div>
-                    <div class="user-plan">Proプラン</div>
-                </div>
-                
-                <!-- 言語切り替え -->
-                <div class="language-switch">
-                    <button class="lang-btn active" onclick="switchLanguage('ja')">日本語</button>
-                    <button class="lang-btn" onclick="switchLanguage('en')">English</button>
+                <!-- ユーザーメニュー -->
+                <div class="user-menu">
+                    <button class="user-menu-btn" onclick="toggleUserMenu(this)">
+                        <span class="user-avatar">👤</span>
+                    </button>
+                    <div class="user-dropdown">
+                        <div style="padding: 12px 16px; border-bottom: 1px solid #2a3a4a; margin-bottom: 8px;">
+                            <div style="color: #ffffff; font-weight: 600; margin-bottom: 4px;">田中太郎</div>
+                            <div style="color: #7a8a9a; font-size: 12px;">Proプラン</div>
+                        </div>
+                        <a href="#" class="dropdown-item">
+                            <span class="dropdown-icon">👤</span>
+                            マイアカウント
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <span class="dropdown-icon">⚙️</span>
+                            アカウント設定
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <span class="dropdown-icon">🚪</span>
+                            ログアウト
+                        </a>
+                    </div>
                 </div>
             </div>
         </header>
 
+        <!-- サイドメニューオーバーレイ -->
+        <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
+        <!-- サイドメニュー -->
+        <nav class="sidebar" id="sidebar">
+            <!-- ダッシュボード -->
+            <div class="sidebar-section">
+                <ul class="sidebar-menu">
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link active">
+                            <span class="sidebar-icon">🏠</span>
+                            ダッシュボード
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- AIレポート -->
+            <div class="sidebar-section">
+                <ul class="sidebar-menu">
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link" onclick="toggleSubmenu(this)">
+                            <span class="sidebar-icon">📄</span>
+                            AIレポート
+                            <span class="sidebar-badge" style="background: #00d4ff;">New</span>
+                            <span class="sidebar-toggle">▶</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="#" class="sidebar-link"><span class="sidebar-icon">📅</span>デイリーレポート</a></li>
+                            <li><a href="#" class="sidebar-link"><span class="sidebar-icon">📊</span>週次マーケット分析</a></li>
+                            <li><a href="#" class="sidebar-link"><span class="sidebar-icon">🎯</span>注目銘柄レポート</a></li>
+                            <li><a href="#" class="sidebar-link"><span class="sidebar-icon">📈</span>テクニカル分析</a></li>
+                            <li><a href="#" class="sidebar-link"><span class="sidebar-icon">🌐</span>マクロ経済レポート</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- アラート -->
+            <div class="sidebar-section">
+                <ul class="sidebar-menu">
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link" onclick="toggleSubmenu(this)">
+                            <span class="sidebar-icon">🎯</span>
+                            アラート
+                            <span class="sidebar-badge">3</span>
+                            <span class="sidebar-toggle">▶</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="#" class="sidebar-link"><span class="sidebar-icon">📢</span>アクティブアラート (3)</a></li>
+                            <li><a href="#" class="sidebar-link"><span class="sidebar-icon">➕</span>新規アラート作成</a></li>
+                            <li><a href="#" class="sidebar-link"><span class="sidebar-icon">📊</span>アラート履歴</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- マイアカウント -->
+            <div class="sidebar-section">
+                <ul class="sidebar-menu">
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link" onclick="toggleSubmenu(this)">
+                            <span class="sidebar-icon">💼</span>
+                            マイアカウント
+                            <span class="sidebar-toggle">▶</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="#" class="sidebar-link"><span class="sidebar-icon">📊</span>分析履歴</a></li>
+                            <li><a href="#" class="sidebar-link"><span class="sidebar-icon">💳</span>クレジット管理</a></li>
+                            <li><a href="#" class="sidebar-link"><span class="sidebar-icon">📈</span>利用統計</a></li>
+                            <li><a href="#" class="sidebar-link"><span class="sidebar-icon">⚙️</span>アカウント設定</a></li>
+                            <li><a href="#" class="sidebar-link"><span class="sidebar-icon">🌐</span>言語設定</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 学習センター -->
+            <div class="sidebar-section">
+                <ul class="sidebar-menu">
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link" onclick="toggleSubmenu(this)">
+                            <span class="sidebar-icon">📚</span>
+                            学習センター
+                            <span class="sidebar-toggle">▶</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="#" class="sidebar-link"><span class="sidebar-icon">🎓</span>基本ガイド</a></li>
+                            <li><a href="#" class="sidebar-link"><span class="sidebar-icon">📖</span>スコア解説</a></li>
+                            <li><a href="#" class="sidebar-link"><span class="sidebar-icon">🎥</span>使い方動画</a></li>
+                            <li><a href="#" class="sidebar-link"><span class="sidebar-icon">❓</span>FAQ</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- サポート -->
+            <div class="sidebar-section">
+                <ul class="sidebar-menu">
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link" onclick="toggleSubmenu(this)">
+                            <span class="sidebar-icon">🆘</span>
+                            サポート
+                            <span class="sidebar-toggle">▶</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="#" class="sidebar-link"><span class="sidebar-icon">💬</span>チャットサポート</a></li>
+                            <li><a href="#" class="sidebar-link"><span class="sidebar-icon">📧</span>お問い合わせ</a></li>
+                            <li><a href="#" class="sidebar-link"><span class="sidebar-icon">🐛</span>不具合報告</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
         <!-- TradingViewチャート -->
         <div style="background: #1a2332; border-radius: 20px; padding: 20px; margin-bottom: 30px;">
@@ -1171,8 +1492,10 @@
                 <li>当ツールのご利用は自己責任でお願いいたします。</li>
             </ul>
         </div>
+
     </div>
 
+    
     <script>
         let selectedDirection = null;
         let selectedTpPips = 50;
@@ -1323,6 +1646,72 @@
             }
         }
 
+        // サイドメニューの開閉機能
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        // ユーザーメニューの開閉機能
+        function toggleUserMenu(button) {
+            const dropdown = button.nextElementSibling;
+            const isOpen = dropdown.classList.contains('show');
+            
+            // 他のドロップダウンを閉じる
+            document.querySelectorAll('.user-dropdown').forEach(d => {
+                d.classList.remove('show');
+            });
+            document.querySelectorAll('.user-menu-btn').forEach(b => {
+                b.classList.remove('active');
+            });
+            
+            if (!isOpen) {
+                dropdown.classList.add('show');
+                button.classList.add('active');
+            }
+        }
+
+        // サブメニューの開閉機能
+        function toggleSubmenu(element) {
+            event.preventDefault();
+            
+            const submenu = element.nextElementSibling;
+            const toggle = element.querySelector('.sidebar-toggle');
+            
+            if (submenu && submenu.classList.contains('sidebar-submenu')) {
+                submenu.classList.toggle('open');
+                toggle.classList.toggle('open');
+            }
+        }
+
+        // ESCキーでサイドメニューを閉じる
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.querySelector('.sidebar-overlay');
+                
+                if (sidebar.classList.contains('open')) {
+                    sidebar.classList.remove('open');
+                    overlay.classList.remove('active');
+                }
+            }
+        });
+
+        // 画面外クリックでドロップダウンを閉じる
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.user-menu')) {
+                document.querySelectorAll('.user-dropdown').forEach(d => {
+                    d.classList.remove('show');
+                });
+                document.querySelectorAll('.user-menu-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+            }
+        });
+
         // 初期化時にリスクリワード比とプログレスバーを設定
         updateRiskReward();
         
@@ -1331,6 +1720,7 @@
         const initialSlProgress = ((selectedSlPips - 10) / (100 - 10)) * 100;
         document.getElementById('tpPipsSlider').style.setProperty('--progress', initialTpProgress + '%');
         document.getElementById('slPipsSlider').style.setProperty('--progress', initialSlProgress + '%');
+
     </script>
 </body>
 </html>
