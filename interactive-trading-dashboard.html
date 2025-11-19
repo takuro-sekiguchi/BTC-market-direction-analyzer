@@ -1012,7 +1012,7 @@
                 <!-- クレジット情報 -->
                 <div class="credit-info">
                     <span class="credit-label">クレジット</span>
-                    <span class="credit-value">100/300</span>
+                    <span class="credit-value" id="creditDisplay">100/300</span>
                 </div>
                 
                 <!-- ユーザーメニュー -->
@@ -1736,6 +1736,49 @@
         let selectedDirection = null;
         let selectedTpPips = 50;
         let selectedSlPips = 20;
+        let currentCredits = 100; // 現在のクレジット数
+        let maxCredits = 300;     // 最大クレジット数
+
+        // クレジット表示を更新する関数
+        function updateCreditDisplay() {
+            const creditDisplay = document.getElementById('creditDisplay');
+            if (creditDisplay) {
+                creditDisplay.textContent = `${currentCredits}/${maxCredits}`;
+                
+                // クレジット残量に応じて色を変更
+                if (currentCredits <= 10) {
+                    creditDisplay.style.color = '#ff3b3b'; // 赤色（残り少ない）
+                } else if (currentCredits <= 25) {
+                    creditDisplay.style.color = '#ffdd00'; // 黄色（注意）
+                } else {
+                    creditDisplay.style.color = '#00d4ff'; // 通常の青色
+                }
+                
+                console.log(`Credits updated: ${currentCredits}/${maxCredits}`);
+            }
+        }
+
+        // クレジットを消費する関数
+        function consumeCredit() {
+            if (currentCredits > 0) {
+                currentCredits--;
+                updateCreditDisplay();
+                
+                // クレジットが少なくなった場合の警告
+                if (currentCredits === 10) {
+                    setTimeout(() => {
+                        alert('⚠️ クレジット残量が10になりました。追加購入をお考えください。');
+                    }, 1000);
+                } else if (currentCredits === 0) {
+                    setTimeout(() => {
+                        alert('❌ クレジットが不足しています。追加購入が必要です。');
+                    }, 1000);
+                }
+                
+                return true; // 消費成功
+            }
+            return false; // クレジット不足
+        }
 
         // 方向性スコアの動的更新（デモ用）
         setInterval(() => {
@@ -1799,6 +1842,12 @@
         function calculatePatternAnalysis() {
             if (!selectedDirection) {
                 console.log('No direction selected');
+                return;
+            }
+            
+            // クレジット確認
+            if (currentCredits <= 0) {
+                alert('❌ クレジット残量が不足しています。追加購入が必要です。');
                 return;
             }
             
@@ -1990,6 +2039,9 @@
                     console.log('Dynamic result section created');
                 }
                 
+                // 分析完了時にクレジットを消費
+                consumeCredit();
+                
                 // 分析ボタンを再度有効化
                 document.getElementById('calcButton').disabled = false;
                 document.getElementById('calcButton').style.opacity = '1';
@@ -2059,17 +2111,136 @@
         
         // シミュレーション画面に戻る
         function resetToSimulation() {
-            document.getElementById('resultSection').style.display = 'none';
-            document.getElementById('simulationContent').style.display = 'block';
+            console.log('Resetting to simulation screen');
             
-            // 選択状態をリセット
-            selectedDirection = null;
-            document.querySelectorAll('.dir-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            
-            // 分析ボタンを無効化
-            document.getElementById('calcButton').disabled = true;
+            const userSelection = document.getElementById('userSelection');
+            if (userSelection) {
+                // userSelectionの内容をクリアして、元のシミュレーション画面を再構築
+                userSelection.innerHTML = `
+                    <!-- ローディング画面 -->
+                    <div class="loading-screen" id="loadingScreen" style="display: none;">
+                        <div style="text-align: center; padding: 60px 20px;">
+                            <div class="loading-spinner">
+                                <div class="spinner"></div>
+                            </div>
+                            <div style="color: #00d4ff; font-size: 18px; font-weight: 600; margin-top: 20px;">
+                                分析中...
+                            </div>
+                            <div style="color: #7a8a9a; font-size: 13px; margin-top: 8px;">
+                                市場データを解析しています
+                            </div>
+                            <div class="loading-progress">
+                                <div class="progress-bar"></div>
+                            </div>
+                            <div style="color: #7a8a9a; font-size: 12px; margin-top: 20px;">
+                                このプロセスには数秒かかる場合があります
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- シミュレーションツール（通常画面） -->
+                    <div class="simulation-content" id="simulationContent">
+                    
+                    <!-- 現在価格表示 -->
+                    <div style="background: #0f1722; border-radius: 8px; padding: 16px; margin-bottom: 20px; text-align: center; border: 1px solid rgba(42, 58, 74, 0.4);">
+                        <div style="color: #7a8a9a; font-size: 12px;">現在のBTC/USD価格(Coinbase)</div>
+                        <div style="color: #00d4ff; font-size: 24px; font-weight: 700;" id="currentBtcPrice">$--,---</div>
+                    </div>
+                    
+                    <!-- 方向選択 -->
+                    <div class="direction-buttons">
+                        <button class="dir-btn buy" onclick="selectDirection('buy')">
+                            <span style="font-size: 18px; margin-right: 8px;">↑</span>
+                            <span style="font-size: 14px;">買い</span>
+                        </button>
+                        <button class="dir-btn sell" onclick="selectDirection('sell')">
+                            <span style="font-size: 18px; margin-right: 8px;">↓</span>
+                            <span style="font-size: 14px;">売り</span>
+                        </button>
+                    </div>
+
+                    <!-- TP/SL Pips選択 -->
+                    <div class="pips-selection">
+                        <!-- TP設定 -->
+                        <div style="margin-bottom: 16px;">
+                            <div class="pips-label">
+                                <span style="color: #7a8a9a; font-size: 13px;">利確幅（TP）</span>
+                                <span class="pips-value" id="tpPipsValue" style="font-size: 14px; font-weight: 600;">100 pips</span>
+                            </div>
+                            <div style="background: #0a0e1a; border-radius: 6px; padding: 8px; margin-bottom: 8px; text-align: center;">
+                                <div style="color: #7a8a9a; font-size: 11px;">目標価格</div>
+                                <div style="color: #00ff00; font-size: 16px; font-weight: 600;" id="tpPriceLevel">$--,---</div>
+                            </div>
+                            <div class="slider-container">
+                                <div class="slider-progress" id="tpProgressBar"></div>
+                                <input type="range" class="pips-slider" id="tpPipsSlider" 
+                                       min="100" max="10000" value="100" step="100"
+                                       oninput="updateTpPips(this.value)" 
+                                       onchange="updateTpPips(this.value)">
+                            </div>
+                            <div class="slider-labels">
+                                <span>100</span>
+                                <span>2500</span>
+                                <span>5000</span>
+                                <span>7500</span>
+                                <span>10000</span>
+                            </div>
+                        </div>
+
+                        <!-- SL設定 -->
+                        <div style="margin-bottom: 16px;">
+                            <div class="pips-label">
+                                <span style="color: #7a8a9a; font-size: 13px;">損切り幅（SL）</span>
+                                <span class="pips-value" id="slPipsValue" style="font-size: 14px; font-weight: 600;">100 pips</span>
+                            </div>
+                            <div style="background: #0a0e1a; border-radius: 6px; padding: 8px; margin-bottom: 8px; text-align: center;">
+                                <div style="color: #7a8a9a; font-size: 11px;">ストップ価格</div>
+                                <div style="color: #ff3b3b; font-size: 16px; font-weight: 600;" id="slPriceLevel">$--,---</div>
+                            </div>
+                            <div class="slider-container">
+                                <div class="slider-progress" id="slProgressBar"></div>
+                                <input type="range" class="pips-slider" id="slPipsSlider" 
+                                       min="100" max="10000" value="100" step="100"
+                                       oninput="updateSlPips(this.value)" 
+                                       onchange="updateSlPips(this.value)">
+                            </div>
+                            <div class="slider-labels">
+                                <span>100</span>
+                                <span>2500</span>
+                                <span>5000</span>
+                                <span>7500</span>
+                                <span>10000</span>
+                            </div>
+                        </div>
+
+                        <!-- リスクリワード表示 -->
+                        <div style="background: #0f1722; padding: 12px; border-radius: 8px; text-align: center; border: 1px solid rgba(42, 58, 74, 0.4);">
+                            <div style="color: #7a8a9a; font-size: 12px; margin-bottom: 4px;">リスクリワード比</div>
+                            <div style="font-size: 18px; font-weight: 700; color: #00d4ff;" id="riskRewardRatio">1.0 : 1</div>
+                        </div>
+                    </div>
+
+                    <button class="calc-button" id="calcButton" onclick="calculatePatternAnalysis()" disabled style="padding: 14px; font-size: 15px; font-weight: 600; margin-bottom: 16px;">
+                        分析実行
+                        <div style="font-size: 11px; font-weight: 400; color: #ffffff; margin-top: 2px;">1クレジットが消費されます</div>
+                    </button>
+                    </div>
+                `;
+                
+                // 選択状態をリセット
+                selectedDirection = null;
+                selectedTpPips = 100;
+                selectedSlPips = 100;
+                
+                // 価格とリスクリワード比を再初期化
+                setTimeout(() => {
+                    updateTpPips(100);
+                    updateSlPips(100);
+                    updateRiskRewardRatio();
+                }, 100);
+                
+                console.log('Simulation screen restored');
+            }
         }
         
         // 言語切り替え機能
@@ -2303,6 +2474,9 @@
         // 初期化：BTC価格を取得し、定期更新を開始
         fetchBtcPrice();
         initializeSliders();
+        
+        // クレジット表示を初期化
+        updateCreditDisplay();
         
         // 10秒ごとに価格を更新（取引所データなのでより頻繁に）
         setInterval(fetchBtcPrice, 10000);
