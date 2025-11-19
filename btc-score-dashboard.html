@@ -70,6 +70,80 @@
             display: block;
         }
 
+        /* TradingView用コンパクトスコア表示 */
+        .tradingview-scores {
+            background: rgba(26, 35, 50, 0.95);
+            border: 1px solid #1a2332;
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .tradingview-scores {
+                gap: 8px;
+                font-size: 11px;
+                padding: 6px 10px;
+            }
+            
+            .score-item {
+                gap: 2px;
+                padding: 1px 4px;
+            }
+            
+            .timeframe-label {
+                min-width: 18px;
+                font-size: 10px;
+            }
+            
+            .score-value {
+                min-width: 22px;
+                font-size: 10px;
+            }
+        }
+
+        .score-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: rgba(15, 23, 34, 0.8);
+        }
+
+        .timeframe-label {
+            color: #7a8a9a;
+            font-weight: 500;
+            min-width: 20px;
+        }
+
+        .score-value {
+            font-weight: bold;
+            font-size: 11px;
+            min-width: 25px;
+            text-align: center;
+        }
+
+        .score-bull {
+            color: #00ff88;
+        }
+
+        .score-bear {
+            color: #ff4757;
+        }
+
+        .score-neutral {
+            color: #ffd700;
+        }
+
         .main-score-card {
             background: linear-gradient(135deg, #1a2332 0%, #0f1722 100%);
             border-radius: 20px;
@@ -564,6 +638,34 @@
 
         <!-- シグナルビュー（初心者向け） -->
         <div class="signal-view" id="signalView">
+            <!-- TradingView用コンパクトスコア -->
+            <div class="tradingview-scores">
+                <div class="score-item">
+                    <span class="timeframe-label">5m</span>
+                    <span class="score-value score-bear">-800</span>
+                </div>
+                <div class="score-item">
+                    <span class="timeframe-label">15m</span>
+                    <span class="score-value score-bull">+1200</span>
+                </div>
+                <div class="score-item">
+                    <span class="timeframe-label">1h</span>
+                    <span class="score-value score-bull">+3500</span>
+                </div>
+                <div class="score-item">
+                    <span class="timeframe-label">4h</span>
+                    <span class="score-value score-bull">+4800</span>
+                </div>
+                <div class="score-item">
+                    <span class="timeframe-label">1d</span>
+                    <span class="score-value score-bull">+6200</span>
+                </div>
+                <div class="score-item">
+                    <span class="timeframe-label">総合</span>
+                    <span class="score-value score-bull">+2980</span>
+                </div>
+            </div>
+
             <div class="main-score-card">
                 <h2 style="text-align: center; margin-bottom: 30px; color: #7a8a9a;">市場方向性スコア</h2>
                 <div class="score-meter">
@@ -1108,7 +1210,52 @@
                     initializeTradingView();
                 }, 100);
             }
+            
+            // スコア表示を更新
+            updateTradingViewScores();
         }
+
+        // TradingView用スコア更新
+        function updateTradingViewScores() {
+            const timeframeScores = {
+                '5m': Math.floor(Math.random() * 200 - 100),
+                '15m': Math.floor(Math.random() * 200 - 100),
+                '1h': Math.floor(Math.random() * 200 - 100),
+                '4h': Math.floor(Math.random() * 200 - 100),
+                '1d': Math.floor(Math.random() * 200 - 100)
+            };
+            
+            // 総合スコアを計算
+            const totalScore = Math.floor(Object.values(timeframeScores).reduce((a, b) => a + b, 0) / 6);
+            
+            // スコア表示を更新
+            document.querySelectorAll('.score-item').forEach((item, index) => {
+                const valueSpan = item.querySelector('.score-value');
+                const timeframes = ['5m', '15m', '1h', '4h', '1d', '総合'];
+                const timeframe = timeframes[index];
+                const score = timeframe === '総合' ? totalScore : timeframeScores[timeframe];
+                
+                valueSpan.textContent = score > 0 ? `+${score}` : score.toString();
+                
+                // 色分け
+                valueSpan.className = 'score-value ' + 
+                    (score > 25 ? 'score-bull' : 
+                     score < -25 ? 'score-bear' : 'score-neutral');
+            });
+        }
+
+        // 自動更新機能
+        function startAutoUpdate() {
+            setInterval(() => {
+                updateTradingViewScores();
+            }, 30000); // 30秒ごとに更新
+        }
+
+        // 初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            updateTradingViewScores();
+            startAutoUpdate();
+        });
     </script>
 </body>
 </html>

@@ -929,6 +929,22 @@
             .container div[style*="height: 600"] {
                 height: 400px !important;
             }
+            
+            /* 時間足スコア表示のモバイル対応 */
+            .timeframe-scores {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 8px !important;
+            }
+            
+            .timeframe-scores-values {
+                justify-content: flex-start !important;
+                gap: 10px !important;
+            }
+            
+            .timeframe-scores-values span {
+                font-size: 12px !important;
+            }
         }
     </style>
 </head>
@@ -1087,7 +1103,21 @@
         <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px; margin-bottom: 30px;">
             <!-- 左カラム: TradingViewチャート -->
             <div style="background: #1a2332; border-radius: 20px; padding: 20px;">
-                <h3 style="color: #00d4ff; margin-bottom: 20px;">BTC/USD チャート</h3>
+                
+                <!-- 時間足別スコア表示 -->
+                <div style="background: #0f1722; border-radius: 8px; padding: 12px; margin-bottom: 20px; border: 1px solid #2a3a4a;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <span style="color: #7a8a9a; font-size: 13px; font-weight: 500;">時間足別方向性スコア:</span>
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                            <span style="color: #ff3b3b; font-size: 13px; font-weight: 600;">5分足: -15</span>
+                            <span style="color: #ffdd00; font-size: 13px; font-weight: 600;">15分足: +25</span>
+                            <span style="color: #00ff00; font-size: 13px; font-weight: 600;">1時間足: +67</span>
+                            <span style="color: #00ff00; font-size: 13px; font-weight: 600;">4時間足: +78</span>
+                            <span style="color: #00ff00; font-size: 13px; font-weight: 600;">日足: +85</span>
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- TradingView Widget BEGIN -->
                 <div class="tradingview-widget-container">
                     <div id="tradingview_btc"></div>
@@ -1158,7 +1188,6 @@
 
             <!-- 右カラム: 投資シミュレーションツール -->
         <div class="user-selection">
-            <h3 class="selection-title">投資シミュレーションツール</h3>
             
             <!-- 現在価格表示 -->
             <div style="background: #0f1722; border-radius: 8px; padding: 16px; margin-bottom: 20px; text-align: center; border: 1px solid rgba(42, 58, 74, 0.4);">
