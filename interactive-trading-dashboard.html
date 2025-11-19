@@ -999,17 +999,13 @@
             100% { width: 100%; transform: translateX(100%); }
         }
 
-        /* TradingView OHLC値のみ非表示（シンボル名は表示を維持） */
-        .tv-legend__values,
-        .chart-markup-table .series-ohlc,
-        [data-name="legend-source-item"] .js-legend-series-item:not(.js-legend-title) {
-            display: none !important;
-            visibility: hidden !important;
+        /* TradingViewの基本スタイル */
+        .tradingview-widget-container {
+            height: 600px !important;
         }
-
-        /* 出来高表示を非表示 */
-        [class*="volume"] {
-            display: none !important;
+        
+        #tradingview_btc {
+            height: 600px !important;
         }
     </style>
 </head>
@@ -1188,79 +1184,35 @@
                     <div id="tradingview_btc"></div>
                     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
                     <script type="text/javascript">
-                    new TradingView.widget(
-                    {
-                        "width": "100%",
-                        "height": 600,
+                    new TradingView.widget({
+                        "autosize": true,
                         "symbol": "COINBASE:BTCUSD",
                         "interval": "60",
                         "timezone": "Asia/Tokyo",
                         "theme": "dark",
                         "style": "1",
                         "locale": "ja",
+                        "toolbar_bg": "#1a2332",
                         "enable_publishing": false,
+                        "withdateranges": true,
+                        "hide_side_toolbar": false,
                         "allow_symbol_change": true,
                         "container_id": "tradingview_btc",
-                        "drawings_access": {
-                            "type": "black",
-                            "tools": [
-                                { "name": "Regression Trend" },
-                                { "name": "Trend Line" },
-                                { "name": "Horizontal Line" },
-                                { "name": "Vertical Line" },
-                                { "name": "Cross Line" },
-                                { "name": "Rectangle" },
-                                { "name": "Circle" },
-                                { "name": "Arrow" },
-                                { "name": "Text" },
-                                { "name": "Note" },
-                                { "name": "Fibonacci Retracement" },
-                                { "name": "Fibonacci Extension" },
-                                { "name": "Price Range" },
-                                { "name": "Measure" }
-                            ]
-                        },
-                        "enabled_features": [
-                            "study_templates",
-                            "use_localstorage_for_settings",
-                            "save_chart_properties_to_local_storage",
-                            "chart_property_page_style",
-                            "chart_template",
-                            "timeframes_toolbar",
-                            "header_symbol_search",
-                            "header_resolutions",
-                            "header_chart_type",
-                            "header_settings",
-                            "left_toolbar",
-                            "control_bar",
-                            "timeframes_toolbar",
-                            "edit_buttons_in_legend"
+                        "height": 600,
+                        "studies": [
+                            "MASimple@tv-basicstudies",
+                            "RSI@tv-basicstudies"
                         ],
-                        "disabled_features": [
-                            "popup_hints",
-                            "header_saveload",
-                            "header_screenshot",
-                            "header_undo_redo",
-                            "display_market_status",
-                            "legend_context_menu",
-                            "show_hide_button_in_legend",
-                            "legend_widget",
-                            "volume_force_overlay"
-                        ],
-                        "toolbar_bg": "#1a2332",
-                        "hide_side_toolbar": false,
                         "overrides": {
-                            "mainSeriesProperties.showCountdown": false,
-                            "mainSeriesProperties.showPrevClose": false,
+                            "paneProperties.background": "#1a2332",
+                            "paneProperties.vertGridProperties.color": "#2a3a4a",
+                            "paneProperties.horzGridProperties.color": "#2a3a4a",
+                            "symbolWatermarkProperties.transparency": 90,
+                            "scalesProperties.textColor": "#ffffff",
                             "paneProperties.legendProperties.showSeriesOHLC": false,
-                            "paneProperties.legendProperties.showSeriesTitle": true,
-                            "volumePaneSize": "amin",
-                            "scalesProperties.showSeriesLastValue": true,
-                            "scalesProperties.showSeriesOHLC": false
-                        },
-                        "hide_volume": true
-                    }
-                    );
+                            "volumePaneSize": "tiny"
+                        }
+                    });
                     </script>
                 </div>
                 <!-- TradingView Widget END -->
